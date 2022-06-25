@@ -297,6 +297,9 @@ globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+    
+    -- rofi-alt-tab
+    awful.key({ modkey,           }, "Tab", function () awful.spawn("rofi -show window")     end),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -311,8 +314,11 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey },            "r",     function () awful.util.spawn("rofi -show drun")  end,
               {description = "run prompt", group = "launcher"}),
+    
+    awful.key({ modkey },            "b",     function () awful.util.spawn("firefox")  end,
+              {description = "firefox", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -528,30 +534,30 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
+--    awful.titlebar(c) : setup {
+--        { -- Left
+--            awful.titlebar.widget.iconwidget(c),
+--            buttons = buttons,
+--            layout  = wibox.layout.fixed.horizontal
+--        },
+--        { -- Middle
+--            { -- Title
+--                align  = "center",
+--                widget = awful.titlebar.widget.titlewidget(c)
+--            },
+--            buttons = buttons,
+--            layout  = wibox.layout.flex.horizontal
+--        },
+--        { -- Right
+--            awful.titlebar.widget.floatingbutton (c),
+--            awful.titlebar.widget.maximizedbutton(c),
+--            awful.titlebar.widget.stickybutton   (c),
+--            awful.titlebar.widget.ontopbutton    (c),
+--            awful.titlebar.widget.closebutton    (c),
+--            layout = wibox.layout.fixed.horizontal()
+--        },
+--        layout = wibox.layout.align.horizontal
+--    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -564,5 +570,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- autostart applications
-awful.spawn.with_shell("nitrogen --restore")
+awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
 awful.spawn.with_shell("compton")
+
+beautiful.useless_gap = 7
