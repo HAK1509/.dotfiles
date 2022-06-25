@@ -313,12 +313,23 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
+    -- media keys
+    awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell("playerctl play-pause") end),
+    awful.key({ }, "XF86AudioNext", function () awful.spawn.with_shell("playerctl next") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.spawn.with_shell("playerctl previous") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("playerctl volume 0.1+") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn.with_shell("playerctl volume 0.1-") end),
+
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.util.spawn("rofi -show drun")  end,
               {description = "run prompt", group = "launcher"}),
-    
     awful.key({ modkey },            "b",     function () awful.util.spawn("firefox")  end,
               {description = "firefox", group = "launcher"}),
+    awful.key({modkey },	     "m",     function () awful.util.spawn("spotify") end, 
+	      {description = "spotify", group = "launcher"}),
+
+    awful.key({modkey },	     "p",     function () awful.util.spawn("keepassxc") end, 
+	      {description = "keepassxc", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -329,10 +340,10 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
+              {description = "lua execute prompt", group = "awesome"})
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+--    awful.key({ modkey }, "p", function() menubar.show() end,
+--              {description = "show the menubar", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -568,6 +579,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- volume controls
+awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell("playerctl play-pause") end)
 
 -- autostart applications
 awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
