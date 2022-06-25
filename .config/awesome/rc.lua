@@ -586,5 +586,6 @@ awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell("playerctl pl
 -- autostart applications
 awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
 awful.spawn.with_shell("compton")
+awful.spawn.with_shell("dropbox")
 
 beautiful.useless_gap = 7
