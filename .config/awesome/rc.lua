@@ -169,7 +169,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "DEVELOPMENT", "MUSIC", "PWMANAGER", "BROWSING", "SYSTEM", "DISCORD", "OBS", "VIRTUAL", "EDITING" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -327,11 +327,16 @@ globalkeys = gears.table.join(
               {description = "firefox", group = "launcher"}),
     awful.key({modkey },	     "m",     function () awful.util.spawn("spotify") end, 
 	      {description = "spotify", group = "launcher"}),
-
     awful.key({modkey },	     "p",     function () awful.util.spawn("keepassxc") end, 
 	      {description = "keepassxc", group = "launcher"}),
+    awful.key({modkey },	     "d",     function () awful.util.spawn("discord") end, 
+	      {description = "discord", group = "launcher"}),
+    awful.key({modkey },	     "o",     function () awful.util.spawn("obs") end, 
+	      {description = "obs", group = "launcher"}),
+    awful.key({modkey },	     "g",     function () awful.util.spawn("gimp") end, 
+	      {description = "gimp", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
+    awful.key({modkey },             "x",
               function ()
                   awful.prompt.run {
                     prompt       = "Run Lua code: ",
@@ -341,10 +346,11 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"})
-    -- Menubar
+--    Menubar
 --    awful.key({ modkey }, "p", function() menubar.show() end,
 --              {description = "show the menubar", group = "launcher"})
 )
+
 
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
@@ -580,12 +586,8 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- volume controls
-awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell("playerctl play-pause") end)
-
--- autostart applications
+--and maybe a southern thing. In London basically no one will talk to you on the streets unless they’re old from my experience. In the country, - autostart applications
 awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("dropbox")
-
 beautiful.useless_gap = 7
