@@ -169,7 +169,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "DEVELOPMENT", "MUSIC", "PWMANAGER", "BROWSING", "SYSTEM", "DISCORD", "OBS", "VIRTUAL", "EDITING" }, s, awful.layout.layouts[1])
+    awful.tag({ "DEV", "MUSIC", "PWM", "WWW", "SYS", "CHAT", "OBS", "VBX", "SPR" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -203,7 +203,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -276,7 +276,7 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
+    awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
@@ -325,16 +325,12 @@ globalkeys = gears.table.join(
               {description = "run prompt", group = "launcher"}),
     awful.key({ modkey },            "b",     function () awful.util.spawn("firefox")  end,
               {description = "firefox", group = "launcher"}),
-    awful.key({modkey },	     "m",     function () awful.util.spawn("spotify") end, 
-	      {description = "spotify", group = "launcher"}),
     awful.key({modkey },	     "p",     function () awful.util.spawn("keepassxc") end, 
 	      {description = "keepassxc", group = "launcher"}),
     awful.key({modkey },	     "d",     function () awful.util.spawn("discord") end, 
 	      {description = "discord", group = "launcher"}),
-    awful.key({modkey },	     "o",     function () awful.util.spawn("obs") end, 
-	      {description = "obs", group = "launcher"}),
-    awful.key({modkey },	     "g",     function () awful.util.spawn("gimp") end, 
-	      {description = "gimp", group = "launcher"}),
+    awful.key({modkey },	     "e",     function () awful.util.spawn("emacs") end, 
+	      {description = "emacs", group = "launcher"}),
 
     awful.key({modkey },             "x",
               function ()
@@ -477,15 +473,15 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+      }
     },
 
     -- Floating clients.
     { rule_any = {
         instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-          "pinentry",
+            "DTA",  -- Firefox addon DownThemAll.
+            "copyq",  -- Includes session name in class.
+            "pinentry",
         },
         class = {
           "Arandr",
@@ -517,8 +513,12 @@ awful.rules.rules = {
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+     { rule = { class = "spotify" },
+       properties = { screen = 1, tag = "MUSIC" } },
+    { rule = { class = "KeePassXC" },
+       properties = { screen = 1, tag = "PWM" } },
+    { rule = { class = "discord" },
+       properties = { screen = 1, tag = "CHAT" } },
 }
 -- }}}
 
@@ -586,8 +586,11 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
---and maybe a southern thing. In London basically no one will talk to you on the streets unless they’re old from my experience. In the country, - autostart applications
+-- autostart applications
 awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("dropbox")
+awful.spawn.with_shell("/usr/bin/emacs --daemon")
+awful.spawn("discord")
+awful.spawn("keepassxc")
 beautiful.useless_gap = 7
