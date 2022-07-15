@@ -1,0 +1,14 @@
+dracula-gtk-theme
+dropbox
+ffmpeg-compat-57
+libglade
+libglademm
+openjpeg
+paman
+pycharm-professional
+spotify
+tor-browser
+ttf-meslo-nerd-font-powerlevel10k
+ttf-ms-fonts
+yay-git
+zsh-theme-powerlevel10k-git
