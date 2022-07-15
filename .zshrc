@@ -31,8 +31,9 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # alias'
 alias rwp="feh --randomize --bg-scale /home/hak/pictures/wallpapers"
-alias emacs="emacsclient -c -a 'emacs'"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
+# configs for emacs / doom emacs
 export PATH="$HOME/.emacs.d/bin:$PATH"
+alias emacs="emacsclient -c -a 'emacs'"

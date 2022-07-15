@@ -45,7 +45,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -185,10 +185,10 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
     }
 
     -- Create a tasklist widget
+    --
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
@@ -258,9 +258,9 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey            }, ",", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey            }, ".", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
@@ -294,9 +294,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
+              {description = "select next", group = "layout"}), awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end, {description = "select previous", group = "layout"}),
     
     -- rofi-alt-tab
     awful.key({ modkey,           }, "Tab", function () awful.spawn("rofi -show window")     end),
@@ -322,15 +320,17 @@ globalkeys = gears.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.util.spawn("rofi -show drun")  end,
-              {description = "run prompt", group = "launcher"}),
+        {description = "run prompt", group = "launcher"}),
     awful.key({ modkey },            "b",     function () awful.util.spawn("firefox")  end,
-              {description = "firefox", group = "launcher"}),
+        {description = "firefox", group = "launcher"}),
     awful.key({modkey },	     "p",     function () awful.util.spawn("keepassxc") end, 
-	      {description = "keepassxc", group = "launcher"}),
+	    {description = "keepassxc", group = "launcher"}),
     awful.key({modkey },	     "d",     function () awful.util.spawn("discord") end, 
-	      {description = "discord", group = "launcher"}),
+	    {description = "discord", group = "launcher"}),
     awful.key({modkey },	     "e",     function () awful.util.spawn("emacs") end, 
-	      {description = "emacs", group = "launcher"}),
+	    {description = "emacs", group = "launcher"}),
+    awful.key({modkey, "Shift"   }, "s",     function () awful.util.spawn("flameshot gui -c") end,
+	    {description = "Snipping tool", group = "launcher"}),
 
     awful.key({modkey },             "x",
               function ()
@@ -587,8 +587,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- autostart applications
-awful.spawn.with_shell("feh --randomize --bg-scale ~/pictures/wallpapers/")
-awful.spawn.with_shell("compton")
+awful.spawn.with_shell("feh --bg-scale ~/pictures/wallpapers/dracula.png")
+ awful.spawn.with_shell("compton")
 awful.spawn.with_shell("dropbox")
 awful.spawn.with_shell("/usr/bin/emacs --daemon")
 awful.spawn("discord")
