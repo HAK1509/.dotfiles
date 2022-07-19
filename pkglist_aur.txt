@@ -10,5 +10,7 @@ spotify
 tor-browser
 ttf-meslo-nerd-font-powerlevel10k
 ttf-ms-fonts
+vscodium-bin
+vscodium-bin-marketplace
 yay-git
 zsh-theme-powerlevel10k-git
