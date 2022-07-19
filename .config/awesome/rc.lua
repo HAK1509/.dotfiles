@@ -169,7 +169,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "DEV", "MUSIC", "PWM", "WWW", "SYS", "CHAT", "OBS", "VBX", "SPR" }, s, awful.layout.layouts[1])
+    awful.tag({ "DEV", "MUSIC", "PWM", "WWW", "SYS", "CHAT", "OBS", "VBX", "TEXT" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -587,10 +587,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- autostart applications
-awful.spawn.with_shell("feh --bg-scale ~/pictures/wallpapers/dracula.png")
- awful.spawn.with_shell("compton")
+awful.spawn.with_shell("feh --bg-scale --randomize ~/Pictures/wallpapers/")
+ awful.spawn.with_shell("picom")
 awful.spawn.with_shell("dropbox")
 awful.spawn.with_shell("/usr/bin/emacs --daemon")
-awful.spawn("discord")
 awful.spawn("keepassxc")
 beautiful.useless_gap = 7
