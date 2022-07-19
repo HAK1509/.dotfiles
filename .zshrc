@@ -30,7 +30,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # alias'
-alias rwp="feh --randomize --bg-scale /home/hak/pictures/wallpapers"
+alias rwp="feh --randomize --bg-scale ~/Pictures/wallpapers"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
